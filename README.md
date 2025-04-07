@@ -4,4 +4,4 @@
 3. rm -rf obj/crt
 <!-- remove malloc; realloc; free -->
 4. rm -rf obj/src/malloc
-5. ./llvm_link.sh obj# rustify-libc
+5. ./llvm_link.sh obj
