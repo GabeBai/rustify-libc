@@ -1,3 +1,4 @@
+steps:
 1. make
 2. make llvm-ir
 <!-- remove architecture support -->
