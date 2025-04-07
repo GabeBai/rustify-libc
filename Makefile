@@ -16,7 +16,6 @@ prefix = /usr/local/musl
 includedir = $(prefix)/include
 libdir = $(prefix)/lib
 syslibdir = /lib
-
 MALLOC_DIR = mallocng
 SRC_DIRS = $(addprefix $(srcdir)/,src/* src/malloc/$(MALLOC_DIR) crt ldso $(COMPAT_SRC_DIRS))
 BASE_GLOBS = $(addsuffix /*.c,$(SRC_DIRS))
@@ -134,6 +133,8 @@ $(LOBJS) $(LDSO_OBJS): CFLAGS_ALL += -fPIC
 
 CC_CMD = $(CC) $(CFLAGS_ALL) -c -o $@ $<
 
+LLVM_IR_FLAGS = -S -emit-llvm
+
 # Choose invocation of assembler to be used
 ifeq ($(ADD_CFI),yes)
 	AS_CMD = LC_ALL=C awk -f $(srcdir)/tools/add-cfi.common.awk -f $(srcdir)/tools/add-cfi.$(ARCH).awk $< | $(CC) $(CFLAGS_ALL) -x assembler -c -o $@ -
@@ -146,6 +147,9 @@ obj/%.o: $(srcdir)/%.s
 
 obj/%.o: $(srcdir)/%.S
 	$(CC_CMD)
+
+obj/%.ll: $(srcdir)/%.c $(GENH) $(IMPH)
+	$(CC) $(CFLAGS_ALL) $(LLVM_IR_FLAGS) -c -o $@ $<
 
 obj/%.o: $(srcdir)/%.c $(GENH) $(IMPH)
 	$(CC_CMD)
@@ -236,3 +240,7 @@ distclean: clean
 	rm -f config.mak
 
 .PHONY: all clean install install-libs install-headers install-tools
+
+LL_FILES := $(BASE_SRCS:$(srcdir)/%.c=obj/%.ll)
+
+llvm-ir: $(LL_FILES)
