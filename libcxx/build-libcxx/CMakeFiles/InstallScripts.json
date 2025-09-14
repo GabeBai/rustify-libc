@@ -1,0 +1,15 @@
+{
+	"InstallScripts" : 
+	[
+		"/Users/gab/repo/llvm_new/llvm-project/libcxx/build-libcxx/cmake_install.cmake",
+		"/Users/gab/repo/llvm_new/llvm-project/libcxx/build-libcxx/include/cmake_install.cmake",
+		"/Users/gab/repo/llvm_new/llvm-project/libcxx/build-libcxx/src/cmake_install.cmake",
+		"/Users/gab/repo/llvm_new/llvm-project/libcxx/build-libcxx/utils/cmake_install.cmake",
+		"/Users/gab/repo/llvm_new/llvm-project/libcxx/build-libcxx/benchmarks/cmake_install.cmake",
+		"/Users/gab/repo/llvm_new/llvm-project/libcxx/build-libcxx/test/cmake_install.cmake",
+		"/Users/gab/repo/llvm_new/llvm-project/libcxx/build-libcxx/lib/abi/cmake_install.cmake",
+		"/Users/gab/repo/llvm_new/llvm-project/libcxx/build-libcxx/llvm-lit/cmake_install.cmake",
+		"/Users/gab/repo/llvm_new/llvm-project/libcxx/build-libcxx/docs/cmake_install.cmake"
+	],
+	"Parallel" : false
+}

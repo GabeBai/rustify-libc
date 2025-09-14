@@ -1,0 +1,26 @@
+//first we need to create builder folder which is build-libcxx
+//It build on the llvm 14.0 version
+
+
+1. This is the modifed version of libcxx to build all the source files to LLVM  IR.
+
+
+2. CMake configure :
+
+cmake -S libcxx -B build-libcxx -G Ninja \
+  -DCMAKE_BUILD_TYPE=Release \
+  -DCMAKE_C_COMPILER=clang -DCMAKE_CXX_COMPILER=clang++ \
+  -DLIBCXX_CXX_ABI=none -DLIBCXX_ENABLE_ABI_LINKER_SCRIPT=OFF
+
+3. build IR
+
+ninja -C build-libcxx cxx_shared-ir-sink cxx_static-ir-sink
+
+
+4. check  all the IR files
+
+cat build-libcxx/ir/cxx_shared_ll_list.txt
+
+5. Link
+
+llvm-link @build-libcxx/ir/cxx_shared_ll.rsp -o cxx_shared.bc
